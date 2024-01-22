@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tip Calculator Project</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+</head>
+
+<body>
+    <header>
+        <!-- place navbar here -->
+    </header>
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="totalBill" class="form-label">Total Bill:</label>
+                    <input type="text" class="form-control" id="totalBill" placeholder="Enter total bill" />
+                </div>
+                <div class="col-md-6">
+                    <label for="numOfPeople" class="form-label">Number of People:</label>
+                    <input type="text" class="form-control" id="numOfPeople" placeholder="Enter number of people" />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label for="serviceQuality" class="form-label">Service Quality:</label>
+                    <select class="form-select" id="serviceQuality">
+                        <option value="Great">Great</option>
+                        <option value="Good">Good</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mt-4">
+                    <button class="btn btn-primary" onclick="calculateAndDisplay()">Calculate</button>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h4>Results:</h4>
+                    <p id="tipResult"></p>
+                    <p id="totalBillResult"></p>
+                    <p id="amtPerPersonResult"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+
+
+        function calculateAndDisplay() {
+            let bill = parseFloat(document.getElementById('totalBill').value);
+            let numOfPpl = parseInt(document.getElementById('numOfPeople').value);
+            let serviceQuality = document.getElementById('serviceQuality').value;
+
+            let tip = calculateTip(bill, serviceQuality);
+            let totalBill = calculateTotalBill(bill, tip);
+            let amtPerPers = calcAmtPerPrs(totalBill, numOfPpl);
+
+            document.getElementById('tipResult').innerText = 'Tip: $' + tip.toFixed(2);
+            document.getElementById('totalBillResult').innerText = 'Total Bill: $' + totalBill.toFixed(2);
+            document.getElementById('amtPerPersonResult').innerText = 'Amount per person: $' + amtPerPers.toFixed(2);
+        }
+
+        function calculateTip(bill, quality) {
+            if (quality === 'Great') {
+                return bill * 0.2;
+            } else if (quality === 'Good') {
+                return bill * 0.15;
+            } else if (quality === 'Poor') {
+                return bill * 0.10;
+            } else {
+                //alert("Please enter a valid value")
+                return 0;
+            }
+        }
+
+        function calculateTotalBill(bill, tip) {
+            return bill + tip;
+        }
+
+        function calcAmtPerPrs(totalBill, numOfPpl) {
+            return totalBill / numOfPpl;
+        }
+    </script>
+</body>
+
+</html>
